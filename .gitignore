@@ -1,11 +1,8 @@
 # Dataset files
 data/raw/
-data/clean/
-*.csv
 *.xlsx
 
-# Model files
-models/*.pkl
+
 
 # Outputs
 outputs/*.html

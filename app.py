@@ -20,7 +20,7 @@ st.set_page_config(
 # ============================================
 @st.cache_data
 def load_data():
-    df = pd.read_csv(r'C:\Users\ICTServices\Desktop\Accident\data\clean\accidents_clean.csv')
+    df = pd.read_csv('data/clean/accidents_clean.csv')
     df['hour'] = pd.to_numeric(
         df['TIME 24 HOURS'].astype(str).str.zfill(4).str[:2],
         errors='coerce'
@@ -41,9 +41,9 @@ def load_data():
 @st.cache_resource
 def load_model():
     from sklearn.preprocessing import LabelEncoder
-    with open(r'C:\Users\ICTServices\Desktop\Accident\models\accident_risk_model.pkl', 'rb') as f:
+    with open(r'models/accident_risk_model.pkl', 'rb') as f:
         model = pickle.load(f)
-    df_enc = pd.read_csv(r'C:\Users\ICTServices\Desktop\Accident\data\clean\accidents_clean.csv')
+    df_enc = pd.read_csv('data/clean/accidents_clean.csv')
     df_enc['COUNTY'] = df_enc['COUNTY'].str.strip().str.upper()
     df_enc['ROAD'] = df_enc['ROAD'].str.strip().str.upper()
     le_county = LabelEncoder()
