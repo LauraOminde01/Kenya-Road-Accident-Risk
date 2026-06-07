@@ -39,11 +39,11 @@ risk intelligence.
 
 ## Key Findings from the Data
 
-- **8pm is the most dangerous hour** — night driving accounts for a disproportionate share of casualties
-- **Sunday is the deadliest day** — weekend fatigue and late night travel elevate risk significantly
+- **8pm is the most dangerous hour** - night driving accounts for a disproportionate share of casualties
+- **Sunday is the deadliest day** - weekend fatigue and late night travel elevate risk significantly
 - **Nairobi-Mombasa highway** has the highest recorded accident count of any road in the dataset
-- **85% of victims are male** — male drivers aged 25 to 40 represent the highest risk demographic
-- **Careless driving and speeding** are the two leading causes — both preventable
+- **85% of victims are male** - male drivers aged 25 to 40 represent the highest risk demographic
+- **Careless driving and speeding** are the two leading causes - both preventable
 
 ---
 
@@ -57,7 +57,7 @@ based on time and location features.
 | Algorithm | Random Forest Classifier |
 | Features | Hour, night indicator, weekend indicator, peak hour indicator, county, road |
 | Class Imbalance | Oversampling applied to training set only |
-| Test Evaluation | Original unseen data — no data leakage |
+| Test Evaluation | Original unseen data - no data leakage |
 | High Risk Recall | 100% — model catches every dangerous journey |
 | Weighted F1 | 0.61 |
 | Dataset | 1,119 records across 47 Kenya counties |
@@ -105,7 +105,7 @@ streamlit run app/app.py
 ## Limitations and Future Work
 
 **Current limitations**
-- Dataset contains 1,119 records — a larger dataset would improve model accuracy
+- Dataset contains 1,119 records - a larger dataset would improve model accuracy
 - Missing features: weather conditions, road surface, vehicle type, visibility
 - Model weighted F1 of 0.61 reflects the constraints of available data
 
