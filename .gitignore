@@ -1,0 +1,17 @@
+# Dataset files
+data/raw/
+data/clean/
+*.csv
+*.xlsx
+
+# Model files
+models/*.pkl
+
+# Outputs
+outputs/*.html
+outputs/*.png
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
