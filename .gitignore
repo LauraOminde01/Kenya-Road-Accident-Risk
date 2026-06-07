@@ -1,14 +1,24 @@
 # Dataset files
-data/raw/
-*.xlsx
-
-
-
-# Outputs
-outputs/*.html
-outputs/*.png
-
 # Python
 __pycache__/
 *.pyc
+*.pyo
 .ipynb_checkpoints/
+
+# Raw data only - keep clean data for deployment
+data/raw/
+
+# Keep these for deployment
+# data/clean/ - DO NOT ignore
+# models/ - DO NOT ignore
+
+# Local environment
+.env
+*.env
+
+# VS Code
+.vscode/
+
+# Large files
+*.zip
+*.tar.gz
