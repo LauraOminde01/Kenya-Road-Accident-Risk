@@ -1,5 +1,5 @@
 # ============================================
-# KENYA ROAD ACCIDENT RISK DASHBOARD
+# SAFEROUTE KENYA - ACCIDENT RISK PREDICTOR
 # ============================================
 import streamlit as st
 import pandas as pd
@@ -9,9 +9,10 @@ import folium
 import streamlit.components.v1 as components
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
 st.set_page_config(
-    page_title="Kenya Road Accident Risk Dashboard",
+    page_title="SafeRoute Kenya - Accident Risk Predictor",
     layout="wide"
 )
 
@@ -20,11 +21,12 @@ st.set_page_config(
 # ============================================
 @st.cache_data
 def load_data():
-    df = pd.read_csv(r'C:\Users\ICTServices\Desktop\Accident\data\clean\accidents_clean.csv')
+    df = pd.read_csv('data/clean/accidents_clean.csv')
     df['hour'] = pd.to_numeric(
         df['TIME 24 HOURS'].astype(str).str.zfill(4).str[:2],
         errors='coerce'
     )
+    df['hour'] = df['hour'].fillna(df['hour'].median())
     df['is_night'] = df['hour'].apply(
         lambda x: 1 if x >= 20 or x <= 5 else 0
     )
@@ -41,15 +43,20 @@ def load_data():
 @st.cache_resource
 def load_model():
     from sklearn.preprocessing import LabelEncoder
-    with open(r'C:\Users\ICTServices\Desktop\Accident\models\accident_risk_model.pkl', 'rb') as f:
+
+    with open('models/accident_risk_model.pkl', 'rb') as f:
         model = pickle.load(f)
-    df_enc = pd.read_csv(r'C:\Users\ICTServices\Desktop\Accident\data\clean\accidents_clean.csv')
+
+    df_enc = pd.read_csv('data/clean/accidents_clean.csv')
     df_enc['COUNTY'] = df_enc['COUNTY'].str.strip().str.upper()
     df_enc['ROAD'] = df_enc['ROAD'].str.strip().str.upper()
+
     le_county = LabelEncoder()
     le_county.fit(df_enc['COUNTY'].dropna().unique())
+
     le_road = LabelEncoder()
     le_road.fit(df_enc['ROAD'].dropna().unique())
+
     return model, le_county, le_road
 
 df = load_data()
@@ -120,7 +127,7 @@ county_coords = {
 # ============================================
 # SIDEBAR
 # ============================================
-st.sidebar.title("Kenya Road Accident Risk")
+st.sidebar.title("SafeRoute Kenya")
 st.sidebar.markdown("Data source: NTSA Kenya Accident Database")
 st.sidebar.markdown("---")
 
@@ -139,7 +146,7 @@ page = st.sidebar.radio(
 # PAGE 0 - OVERVIEW
 # ============================================
 if page == "Overview":
-    st.title("Kenya Road Accident Risk Dashboard")
+    st.title("SafeRoute Kenya — Accident Risk Predictor")
     st.markdown(
         "This dashboard analyzes Kenya road accident data from the NTSA database. "
         "Use the sidebar to navigate between the map, risk predictor, analytics and recommendations."
@@ -167,7 +174,7 @@ if page == "Overview":
         st.markdown(f"**{top_hour}:00** — late night driving is the highest risk period")
 
     st.markdown("---")
-    st.subheader("Quick Findings")
+    st.subheader("Key Findings")
     st.markdown("""
     - 8pm is the peak accident hour — night driving is significantly more dangerous
     - Sunday has the highest accident rate of any day of the week
@@ -246,6 +253,8 @@ elif page == "Accident Hotspot Map":
     """
 
     kenya_map.get_root().html.add_child(folium.Element(legend_html))
+
+    os.makedirs('outputs', exist_ok=True)
     kenya_map.save('outputs/kenya_accident_map.html')
 
     with open('outputs/kenya_accident_map.html', 'r', encoding='utf-8') as f:
@@ -264,7 +273,7 @@ elif page == "Risk Predictor":
 
     with col1:
         county = st.selectbox(
-            "Select County", 
+            "Select County",
             sorted(df['COUNTY'].dropna().unique())
         )
         hour = st.slider("Hour of Travel (24hr format)", 0, 23, 8)
@@ -275,7 +284,7 @@ elif page == "Risk Predictor":
 
     with col2:
         road = st.selectbox(
-            "Select Road", 
+            "Select Road",
             sorted(df['ROAD'].dropna().unique())
         )
         st.markdown("####")
@@ -409,37 +418,36 @@ elif page == "Analytics":
         st.pyplot(fig)
         plt.close()
 
-
 # ============================================
 # PAGE 4 - RECOMMENDATIONS
 # ============================================
 elif page == "Recommendations":
     st.title("Road Safety Recommendations")
     st.markdown(
-        "Evidence-based recommendations derived from patterns in the NTSA accident database."
+        "Evidence based recommendations derived from patterns in the NTSA accident database."
     )
     st.markdown("---")
 
     st.subheader("For Drivers")
     st.markdown("""
     **Avoid night driving where possible**
-    Accidents peak between 8pm and midnight. If you must travel at night, 
+    Accidents peak between 8pm and midnight. If you must travel at night,
     reduce speed, use full headlights and take regular breaks on long journeys.
 
     **Extra caution on Sundays**
-    Sunday has the highest accident rate of any day. Weekend travel combined 
+    Sunday has the highest accident rate of any day. Weekend travel combined
     with fatigue and social activities creates elevated risk conditions.
 
     **Know your high risk roads**
-    The Nairobi-Mombasa highway accounts for the highest number of recorded 
+    The Nairobi-Mombasa highway accounts for the highest number of recorded
     accidents. Maintain safe following distances and avoid overtaking on bends.
 
     **Speed is the leading cause**
-    Cause code 26 (speeding) is the second most common accident cause. 
+    Cause code 26 (speeding) is the second most common accident cause.
     Reducing speed by even 10km/h significantly reduces accident severity.
 
     **Motorcyclists need extra protection**
-    Motorcyclists make up the largest victim category. Always wear a helmet 
+    Motorcyclists make up the largest victim category. Always wear a helmet
     and avoid carrying passengers on highways.
     """)
 
@@ -447,37 +455,37 @@ elif page == "Recommendations":
     st.subheader("For Transport Authorities")
     st.markdown("""
     **Deploy traffic enforcement at peak hours**
-    Concentrate enforcement between 7am-9am and 4pm-8pm when accident 
+    Concentrate enforcement between 7am to 9am and 4pm to 8pm when accident
     frequency is highest.
 
     **Target Nairobi county resources**
-    Nairobi accounts for the highest accident volume. Additional road 
+    Nairobi accounts for the highest accident volume. Additional road
     markings, speed cameras and lighting on key corridors would reduce casualties.
 
     **Night time road safety campaigns**
-    Data shows night driving is disproportionately dangerous. Public awareness 
+    Data shows night driving is disproportionately dangerous. Public awareness
     campaigns targeting late night driving behaviour could have significant impact.
 
-    **Focus on male drivers aged 25-35**
-    The average victim age is 34 years and over 85% are male. 
+    **Focus on male drivers aged 25 to 35**
+    The average victim age is 34 years and over 85% are male.
     Targeted driver education for this demographic would address the majority of incidents.
     """)
 
     st.markdown("---")
     st.subheader("For Insurers and Policymakers")
     st.markdown("""
-    **Risk-based insurance pricing**
-    Time of day, road type and county should be factored into vehicle 
-    insurance pricing models. Night driving on highways represents 
+    **Risk based insurance pricing**
+    Time of day, road type and county should be factored into vehicle
+    insurance pricing models. Night driving on highways represents
     significantly higher actuarial risk.
 
     **Parametric road safety bonds**
-    Counties with consistently high accident rates could be targeted 
+    Counties with consistently high accident rates could be targeted
     with infrastructure improvement bonds tied to measurable safety outcomes.
 
     **Data collection improvements**
-    The current dataset lacks weather, road surface and vehicle condition 
-    data. Enriching NTSA records with these variables would significantly 
+    The current dataset lacks weather, road surface and vehicle condition
+    data. Enriching NTSA records with these variables would significantly
     improve predictive modelling accuracy.
     """)
 
