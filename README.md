@@ -7,7 +7,7 @@
 
 A machine learning powered dashboard that analyzes Kenya road accident 
 patterns, predicts journey risk levels and delivers evidence based road 
-safety recommendations — built on real NTSA accident data.
+safety recommendations - built on real NTSA accident data.
 
 ---
 
