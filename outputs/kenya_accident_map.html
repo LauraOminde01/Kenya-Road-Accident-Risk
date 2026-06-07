@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_362444164c3bcecb74513f4d94e88175 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; bottom: 50px; left: 50px; z-index: 1000;
+         background-color: white; padding: 15px; border-radius: 5px;
+         border: 2px solid grey; font-size: 14px;">
+         <b>Accident Risk Level</b><br>
+         <span style="color:red;">&#9679;</span> High Risk<br>
+         <span style="color:orange;">&#9679;</span> Medium Risk<br>
+         <span style="color:green;">&#9679;</span> Low Risk<br>
+         <br>
+         <i>Circle size = number of accidents</i>
+    </div>
+    
+    
+            <div class="folium-map" id="map_362444164c3bcecb74513f4d94e88175" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_362444164c3bcecb74513f4d94e88175 = L.map(
+                "map_362444164c3bcecb74513f4d94e88175",
+                {
+                    center: [-0.0236, 37.9062],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_365cbcc3a8f29dd899f6a1a1389a4a34 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_365cbcc3a8f29dd899f6a1a1389a4a34.addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+            var circle_marker_5f205d77fe1b0313a020d2f3c2e769be = L.circleMarker(
+                [0.4667, 35.9667],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_307b25c22d3a53f3618330793e42a9e2 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_176b9c89b79149101377b566e466e7da = $(`<div id="html_176b9c89b79149101377b566e466e7da" style="width: 100.0%; height: 100.0%;">             <b>BARINGO</b><br>             Accidents: 16<br>             Risk Level: Medium<br>             Night Accidents: 37.5%<br>             Avg Victim Age: 32.6 years             </div>`)[0];
+                popup_307b25c22d3a53f3618330793e42a9e2.setContent(html_176b9c89b79149101377b566e466e7da);
+            
+        
+
+        circle_marker_5f205d77fe1b0313a020d2f3c2e769be.bindPopup(popup_307b25c22d3a53f3618330793e42a9e2)
+        ;
+
+        
+    
+    
+            var circle_marker_4b696f48b61ac1a0a5e138dc1f31ca6a = L.circleMarker(
+                [-0.7833, 35.35],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_1c6db79b217e57f317fd0705166dc557 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_57203db54565463cd098c6e5ba3e74d2 = $(`<div id="html_57203db54565463cd098c6e5ba3e74d2" style="width: 100.0%; height: 100.0%;">             <b>BOMET</b><br>             Accidents: 14<br>             Risk Level: Medium<br>             Night Accidents: 42.9%<br>             Avg Victim Age: 42.8 years             </div>`)[0];
+                popup_1c6db79b217e57f317fd0705166dc557.setContent(html_57203db54565463cd098c6e5ba3e74d2);
+            
+        
+
+        circle_marker_4b696f48b61ac1a0a5e138dc1f31ca6a.bindPopup(popup_1c6db79b217e57f317fd0705166dc557)
+        ;
+
+        
+    
+    
+            var circle_marker_bba2f9c4d27ff9d4880c7c722298c033 = L.circleMarker(
+                [0.5635, 34.5594],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_7539d4034307d96afceae6dc6b703380 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a46aaa7d1b49150161c6c2cf318c761e = $(`<div id="html_a46aaa7d1b49150161c6c2cf318c761e" style="width: 100.0%; height: 100.0%;">             <b>BUNGOMA</b><br>             Accidents: 23<br>             Risk Level: Medium<br>             Night Accidents: 47.8%<br>             Avg Victim Age: 27.4 years             </div>`)[0];
+                popup_7539d4034307d96afceae6dc6b703380.setContent(html_a46aaa7d1b49150161c6c2cf318c761e);
+            
+        
+
+        circle_marker_bba2f9c4d27ff9d4880c7c722298c033.bindPopup(popup_7539d4034307d96afceae6dc6b703380)
+        ;
+
+        
+    
+    
+            var circle_marker_36a4365ed4cac66687ea5b7aa01c76a5 = L.circleMarker(
+                [0.4608, 34.1116],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_ea91bc17fc130592b4be6c70de3cebd2 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_22fd74f7e9e7961a8a1858eb3c82931f = $(`<div id="html_22fd74f7e9e7961a8a1858eb3c82931f" style="width: 100.0%; height: 100.0%;">             <b>BUSIA</b><br>             Accidents: 11<br>             Risk Level: Medium<br>             Night Accidents: 36.4%<br>             Avg Victim Age: 25.6 years             </div>`)[0];
+                popup_ea91bc17fc130592b4be6c70de3cebd2.setContent(html_22fd74f7e9e7961a8a1858eb3c82931f);
+            
+        
+
+        circle_marker_36a4365ed4cac66687ea5b7aa01c76a5.bindPopup(popup_ea91bc17fc130592b4be6c70de3cebd2)
+        ;
+
+        
+    
+    
+            var circle_marker_9a825dc3ec739a967a311cc9f61d5989 = L.circleMarker(
+                [-0.53, 37.45],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.8, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_f3858725065d75443dccb81f578d6a2a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f14c0f974f188e636d9342bc9b60b0d8 = $(`<div id="html_f14c0f974f188e636d9342bc9b60b0d8" style="width: 100.0%; height: 100.0%;">             <b>EMBU</b><br>             Accidents: 29<br>             Risk Level: Medium<br>             Night Accidents: 24.1%<br>             Avg Victim Age: 36.3 years             </div>`)[0];
+                popup_f3858725065d75443dccb81f578d6a2a.setContent(html_f14c0f974f188e636d9342bc9b60b0d8);
+            
+        
+
+        circle_marker_9a825dc3ec739a967a311cc9f61d5989.bindPopup(popup_f3858725065d75443dccb81f578d6a2a)
+        ;
+
+        
+    
+    
+            var circle_marker_081213c51001490e8d4ea14fda13edcd = L.circleMarker(
+                [-0.4532, 39.6461],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_b70e0cead7752091abc2dc66f1ecd65b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_350944c1d7665812aecab4b093d9d437 = $(`<div id="html_350944c1d7665812aecab4b093d9d437" style="width: 100.0%; height: 100.0%;">             <b>GARISSA</b><br>             Accidents: 12<br>             Risk Level: Medium<br>             Night Accidents: 25.0%<br>             Avg Victim Age: 31.0 years             </div>`)[0];
+                popup_b70e0cead7752091abc2dc66f1ecd65b.setContent(html_350944c1d7665812aecab4b093d9d437);
+            
+        
+
+        circle_marker_081213c51001490e8d4ea14fda13edcd.bindPopup(popup_b70e0cead7752091abc2dc66f1ecd65b)
+        ;
+
+        
+    
+    
+            var circle_marker_c9d5e5638a1d8cc745d4ebfe908690ce = L.circleMarker(
+                [-0.5167, 34.45],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_2794810b6016cd4bccf7a081adc109f2 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_3a1d90e95b38a0ba0738e51e0115bc35 = $(`<div id="html_3a1d90e95b38a0ba0738e51e0115bc35" style="width: 100.0%; height: 100.0%;">             <b>HOMA BAY</b><br>             Accidents: 25<br>             Risk Level: Medium<br>             Night Accidents: 28.0%<br>             Avg Victim Age: 26.4 years             </div>`)[0];
+                popup_2794810b6016cd4bccf7a081adc109f2.setContent(html_3a1d90e95b38a0ba0738e51e0115bc35);
+            
+        
+
+        circle_marker_c9d5e5638a1d8cc745d4ebfe908690ce.bindPopup(popup_2794810b6016cd4bccf7a081adc109f2)
+        ;
+
+        
+    
+    
+            var circle_marker_be95f3a09132db3067e82fe7e7033669 = L.circleMarker(
+                [-0.5167, 34.45],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_9404fcde02b06391f2b57711f661f70e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_66e11a6f6fd37f27f2c36871010bda0d = $(`<div id="html_66e11a6f6fd37f27f2c36871010bda0d" style="width: 100.0%; height: 100.0%;">             <b>HOMA-BAY</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 8.0 years             </div>`)[0];
+                popup_9404fcde02b06391f2b57711f661f70e.setContent(html_66e11a6f6fd37f27f2c36871010bda0d);
+            
+        
+
+        circle_marker_be95f3a09132db3067e82fe7e7033669.bindPopup(popup_9404fcde02b06391f2b57711f661f70e)
+        ;
+
+        
+    
+    
+            var circle_marker_c66fdfd5608d233e22e944a90bbba69b = L.circleMarker(
+                [-0.5167, 34.45],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_3caba65dc2b139ea2f9bf1710a960cdb = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_3e24c005d422a6980f22bdc15fce2544 = $(`<div id="html_3e24c005d422a6980f22bdc15fce2544" style="width: 100.0%; height: 100.0%;">             <b>HOMABAY</b><br>             Accidents: 5<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 25.7 years             </div>`)[0];
+                popup_3caba65dc2b139ea2f9bf1710a960cdb.setContent(html_3e24c005d422a6980f22bdc15fce2544);
+            
+        
+
+        circle_marker_c66fdfd5608d233e22e944a90bbba69b.bindPopup(popup_3caba65dc2b139ea2f9bf1710a960cdb)
+        ;
+
+        
+    
+    
+            var circle_marker_a2dc0e67a4fcc9b5b20b4edd33743694 = L.circleMarker(
+                [0.354, 37.582],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_d0fd87a4bbb809035a07c0c926a8ce34 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_fb6a8cdf5fb15e3c02be28893d97fe71 = $(`<div id="html_fb6a8cdf5fb15e3c02be28893d97fe71" style="width: 100.0%; height: 100.0%;">             <b>ISIOLO</b><br>             Accidents: 2<br>             Risk Level: Low<br>             Night Accidents: 50.0%<br>             Avg Victim Age: 60.0 years             </div>`)[0];
+                popup_d0fd87a4bbb809035a07c0c926a8ce34.setContent(html_fb6a8cdf5fb15e3c02be28893d97fe71);
+            
+        
+
+        circle_marker_a2dc0e67a4fcc9b5b20b4edd33743694.bindPopup(popup_d0fd87a4bbb809035a07c0c926a8ce34)
+        ;
+
+        
+    
+    
+            var circle_marker_a53a5f3d1e5bf137b4814b78ef3f8dca = L.circleMarker(
+                [-1.852, 36.782],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.2, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_763ed9260b9b423197fdb1d5a09a7b26 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2276f8151ef97258fba6e0bcd74b78f3 = $(`<div id="html_2276f8151ef97258fba6e0bcd74b78f3" style="width: 100.0%; height: 100.0%;">             <b>KAJIADO</b><br>             Accidents: 31<br>             Risk Level: Medium<br>             Night Accidents: 54.8%<br>             Avg Victim Age: 26.9 years             </div>`)[0];
+                popup_763ed9260b9b423197fdb1d5a09a7b26.setContent(html_2276f8151ef97258fba6e0bcd74b78f3);
+            
+        
+
+        circle_marker_a53a5f3d1e5bf137b4814b78ef3f8dca.bindPopup(popup_763ed9260b9b423197fdb1d5a09a7b26)
+        ;
+
+        
+    
+    
+            var circle_marker_61e89a21980aeb732e8ddc5be9ae9ea7 = L.circleMarker(
+                [0.2827, 34.7519],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.0, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_b2fc1460e39528615c6b4f4df4c2dd56 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_ae4854114ba264b7efa0b18fb716810c = $(`<div id="html_ae4854114ba264b7efa0b18fb716810c" style="width: 100.0%; height: 100.0%;">             <b>KAKAMEGA</b><br>             Accidents: 40<br>             Risk Level: Medium<br>             Night Accidents: 22.5%<br>             Avg Victim Age: 30.7 years             </div>`)[0];
+                popup_b2fc1460e39528615c6b4f4df4c2dd56.setContent(html_ae4854114ba264b7efa0b18fb716810c);
+            
+        
+
+        circle_marker_61e89a21980aeb732e8ddc5be9ae9ea7.bindPopup(popup_b2fc1460e39528615c6b4f4df4c2dd56)
+        ;
+
+        
+    
+    
+            var circle_marker_719157771a22bf0561ff8eca94fbf21f = L.circleMarker(
+                [-0.3667, 35.2833],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_d94da41309958639fe523d3ffbffadab = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2a9376008f90c3211061ad16bda7bd59 = $(`<div id="html_2a9376008f90c3211061ad16bda7bd59" style="width: 100.0%; height: 100.0%;">             <b>KERCHO</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 100.0%<br>             Avg Victim Age: nan years             </div>`)[0];
+                popup_d94da41309958639fe523d3ffbffadab.setContent(html_2a9376008f90c3211061ad16bda7bd59);
+            
+        
+
+        circle_marker_719157771a22bf0561ff8eca94fbf21f.bindPopup(popup_d94da41309958639fe523d3ffbffadab)
+        ;
+
+        
+    
+    
+            var circle_marker_1334f74cd8d699a039d2d03a8193b71d = L.circleMarker(
+                [-0.3667, 35.2833],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.2, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_dcee76fbbf78cbe8aa9297d86beeac67 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_330dc143ade191f5faff00c4cfdbe522 = $(`<div id="html_330dc143ade191f5faff00c4cfdbe522" style="width: 100.0%; height: 100.0%;">             <b>KERICHO</b><br>             Accidents: 26<br>             Risk Level: Medium<br>             Night Accidents: 26.9%<br>             Avg Victim Age: 30.4 years             </div>`)[0];
+                popup_dcee76fbbf78cbe8aa9297d86beeac67.setContent(html_330dc143ade191f5faff00c4cfdbe522);
+            
+        
+
+        circle_marker_1334f74cd8d699a039d2d03a8193b71d.bindPopup(popup_dcee76fbbf78cbe8aa9297d86beeac67)
+        ;
+
+        
+    
+    
+            var circle_marker_07cf7fc886f8a18d0a788c7e38fbd4e2 = L.circleMarker(
+                [-1.0312, 36.8312],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.8, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_01b876c4b52b775ecae79c38202bea8e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_3ac3e8e49bd1c43f4082c5bbf8caa892 = $(`<div id="html_3ac3e8e49bd1c43f4082c5bbf8caa892" style="width: 100.0%; height: 100.0%;">             <b>KIAMBU</b><br>             Accidents: 99<br>             Risk Level: High<br>             Night Accidents: 45.5%<br>             Avg Victim Age: 35.0 years             </div>`)[0];
+                popup_01b876c4b52b775ecae79c38202bea8e.setContent(html_3ac3e8e49bd1c43f4082c5bbf8caa892);
+            
+        
+
+        circle_marker_07cf7fc886f8a18d0a788c7e38fbd4e2.bindPopup(popup_01b876c4b52b775ecae79c38202bea8e)
+        ;
+
+        
+    
+    
+            var circle_marker_1c194660c6a9b77129f3626e301470ca = L.circleMarker(
+                [-3.5107, 39.9093],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_6bbe4a200dd665fc87e3905d5e6ca65c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2c30ab71a93bddb04592c2eb44885f5b = $(`<div id="html_2c30ab71a93bddb04592c2eb44885f5b" style="width: 100.0%; height: 100.0%;">             <b>KILFI</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: nan years             </div>`)[0];
+                popup_6bbe4a200dd665fc87e3905d5e6ca65c.setContent(html_2c30ab71a93bddb04592c2eb44885f5b);
+            
+        
+
+        circle_marker_1c194660c6a9b77129f3626e301470ca.bindPopup(popup_6bbe4a200dd665fc87e3905d5e6ca65c)
+        ;
+
+        
+    
+    
+            var circle_marker_4c3059839dac703693f5008a7af25e6f = L.circleMarker(
+                [-3.5107, 39.9093],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.4, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_d6b794a4971fc055f668d76c19add81e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_03df18c1277e2d4136c68c46a1b467e1 = $(`<div id="html_03df18c1277e2d4136c68c46a1b467e1" style="width: 100.0%; height: 100.0%;">             <b>KILIFI</b><br>             Accidents: 32<br>             Risk Level: Medium<br>             Night Accidents: 18.8%<br>             Avg Victim Age: 38.3 years             </div>`)[0];
+                popup_d6b794a4971fc055f668d76c19add81e.setContent(html_03df18c1277e2d4136c68c46a1b467e1);
+            
+        
+
+        circle_marker_4c3059839dac703693f5008a7af25e6f.bindPopup(popup_d6b794a4971fc055f668d76c19add81e)
+        ;
+
+        
+    
+    
+            var circle_marker_81341e351662e2099dfb44c50c8d34bd = L.circleMarker(
+                [-0.559, 37.328],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_4b29b10d34961e35052293959676894f = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_9156121e47fbf01b81ec66f5eabe9ef3 = $(`<div id="html_9156121e47fbf01b81ec66f5eabe9ef3" style="width: 100.0%; height: 100.0%;">             <b>KIRINYAGA</b><br>             Accidents: 19<br>             Risk Level: Medium<br>             Night Accidents: 36.8%<br>             Avg Victim Age: 40.0 years             </div>`)[0];
+                popup_4b29b10d34961e35052293959676894f.setContent(html_9156121e47fbf01b81ec66f5eabe9ef3);
+            
+        
+
+        circle_marker_81341e351662e2099dfb44c50c8d34bd.bindPopup(popup_4b29b10d34961e35052293959676894f)
+        ;
+
+        
+    
+    
+            var circle_marker_e63774b355cb4d431194be4df0f08242 = L.circleMarker(
+                [-0.6817, 34.7667],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_aa7d86e63c4f6d0da0df3e8b7f24cf95 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c473754715b3b9bb330043eb0870511a = $(`<div id="html_c473754715b3b9bb330043eb0870511a" style="width: 100.0%; height: 100.0%;">             <b>KISII</b><br>             Accidents: 24<br>             Risk Level: Medium<br>             Night Accidents: 25.0%<br>             Avg Victim Age: 37.2 years             </div>`)[0];
+                popup_aa7d86e63c4f6d0da0df3e8b7f24cf95.setContent(html_c473754715b3b9bb330043eb0870511a);
+            
+        
+
+        circle_marker_e63774b355cb4d431194be4df0f08242.bindPopup(popup_aa7d86e63c4f6d0da0df3e8b7f24cf95)
+        ;
+
+        
+    
+    
+            var circle_marker_3a7a04461982578be1d00bc2331c5107 = L.circleMarker(
+                [-0.0917, 34.768],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.0, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_10a095fc666be82f03abc2d48e9eb771 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_e5593a509b771f99d3b9e1b033e076ca = $(`<div id="html_e5593a509b771f99d3b9e1b033e076ca" style="width: 100.0%; height: 100.0%;">             <b>KISUMU</b><br>             Accidents: 30<br>             Risk Level: Medium<br>             Night Accidents: 46.7%<br>             Avg Victim Age: 40.3 years             </div>`)[0];
+                popup_10a095fc666be82f03abc2d48e9eb771.setContent(html_e5593a509b771f99d3b9e1b033e076ca);
+            
+        
+
+        circle_marker_3a7a04461982578be1d00bc2331c5107.bindPopup(popup_10a095fc666be82f03abc2d48e9eb771)
+        ;
+
+        
+    
+    
+            var circle_marker_f1d40d25dd60f0698ca3f6502eff2b00 = L.circleMarker(
+                [-1.3667, 38.0167],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_0b7bc558d574e4a6fe870bde59bd05e2 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_cde0ba43d7274548a9ccee8556d52967 = $(`<div id="html_cde0ba43d7274548a9ccee8556d52967" style="width: 100.0%; height: 100.0%;">             <b>KITUI</b><br>             Accidents: 15<br>             Risk Level: Medium<br>             Night Accidents: 33.3%<br>             Avg Victim Age: 23.2 years             </div>`)[0];
+                popup_0b7bc558d574e4a6fe870bde59bd05e2.setContent(html_cde0ba43d7274548a9ccee8556d52967);
+            
+        
+
+        circle_marker_f1d40d25dd60f0698ca3f6502eff2b00.bindPopup(popup_0b7bc558d574e4a6fe870bde59bd05e2)
+        ;
+
+        
+    
+    
+            var circle_marker_859fc2fb39c44c952b54c9f631d886cc = L.circleMarker(
+                [-4.1833, 39.45],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_68de5665cc9a934e99152d318f2253ac = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_efb818604f3eee87776b3663a9db4281 = $(`<div id="html_efb818604f3eee87776b3663a9db4281" style="width: 100.0%; height: 100.0%;">             <b>KWALE</b><br>             Accidents: 10<br>             Risk Level: Low<br>             Night Accidents: 50.0%<br>             Avg Victim Age: 30.1 years             </div>`)[0];
+                popup_68de5665cc9a934e99152d318f2253ac.setContent(html_efb818604f3eee87776b3663a9db4281);
+            
+        
+
+        circle_marker_859fc2fb39c44c952b54c9f631d886cc.bindPopup(popup_68de5665cc9a934e99152d318f2253ac)
+        ;
+
+        
+    
+    
+            var circle_marker_93792288567c80d5d0fc2154478ff101 = L.circleMarker(
+                [0.2, 36.7],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_73068d4fbfbd4115c14c8f1b68aa5cb9 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1a2e78d657065a7526e3e1c317b40027 = $(`<div id="html_1a2e78d657065a7526e3e1c317b40027" style="width: 100.0%; height: 100.0%;">             <b>LAIKIPIA</b><br>             Accidents: 6<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 43.0 years             </div>`)[0];
+                popup_73068d4fbfbd4115c14c8f1b68aa5cb9.setContent(html_1a2e78d657065a7526e3e1c317b40027);
+            
+        
+
+        circle_marker_93792288567c80d5d0fc2154478ff101.bindPopup(popup_73068d4fbfbd4115c14c8f1b68aa5cb9)
+        ;
+
+        
+    
+    
+            var circle_marker_c601523fbcd6e69e7fae048f1a7ef722 = L.circleMarker(
+                [-1.5177, 37.2634],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.0, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_0be39006c802c9c32cd676bc0a5c4514 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_78b72597b8460e8450995e24a9418ce6 = $(`<div id="html_78b72597b8460e8450995e24a9418ce6" style="width: 100.0%; height: 100.0%;">             <b>MACHAKOS</b><br>             Accidents: 50<br>             Risk Level: Medium<br>             Night Accidents: 42.0%<br>             Avg Victim Age: 32.9 years             </div>`)[0];
+                popup_0be39006c802c9c32cd676bc0a5c4514.setContent(html_78b72597b8460e8450995e24a9418ce6);
+            
+        
+
+        circle_marker_c601523fbcd6e69e7fae048f1a7ef722.bindPopup(popup_0be39006c802c9c32cd676bc0a5c4514)
+        ;
+
+        
+    
+    
+            var circle_marker_c8f88263fb622f9c9658a0f04c8efe65 = L.circleMarker(
+                [-1.8033, 37.6247],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.0, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_c938c55cb7a65fb486c26342d8d8e8e5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b3f96d8f348fd3e3e46500c482da460c = $(`<div id="html_b3f96d8f348fd3e3e46500c482da460c" style="width: 100.0%; height: 100.0%;">             <b>MAKUENI</b><br>             Accidents: 60<br>             Risk Level: High<br>             Night Accidents: 36.7%<br>             Avg Victim Age: 38.9 years             </div>`)[0];
+                popup_c938c55cb7a65fb486c26342d8d8e8e5.setContent(html_b3f96d8f348fd3e3e46500c482da460c);
+            
+        
+
+        circle_marker_c8f88263fb622f9c9658a0f04c8efe65.bindPopup(popup_c938c55cb7a65fb486c26342d8d8e8e5)
+        ;
+
+        
+    
+    
+            var circle_marker_1e301a156671c0092b2e9dd7950ae0f3 = L.circleMarker(
+                [-0.3031, 36.08],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_7825b0ea8eb5d7ad24ad38c9e4fa66ad = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_773d70984a9d74ce62f8457718e21d9c = $(`<div id="html_773d70984a9d74ce62f8457718e21d9c" style="width: 100.0%; height: 100.0%;">             <b>MAKURU</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 28.0 years             </div>`)[0];
+                popup_7825b0ea8eb5d7ad24ad38c9e4fa66ad.setContent(html_773d70984a9d74ce62f8457718e21d9c);
+            
+        
+
+        circle_marker_1e301a156671c0092b2e9dd7950ae0f3.bindPopup(popup_7825b0ea8eb5d7ad24ad38c9e4fa66ad)
+        ;
+
+        
+    
+    
+            var circle_marker_7b4c8399b8ef210745aa74c3b9f9c3e8 = L.circleMarker(
+                [-3.2175, 40.1169],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_735d78847ec3b9caddb6ec474a8983d1 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_3a3148c8c0940c93cfbfbeb859a4f06f = $(`<div id="html_3a3148c8c0940c93cfbfbeb859a4f06f" style="width: 100.0%; height: 100.0%;">             <b>MALINDI</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: nan years             </div>`)[0];
+                popup_735d78847ec3b9caddb6ec474a8983d1.setContent(html_3a3148c8c0940c93cfbfbeb859a4f06f);
+            
+        
+
+        circle_marker_7b4c8399b8ef210745aa74c3b9f9c3e8.bindPopup(popup_735d78847ec3b9caddb6ec474a8983d1)
+        ;
+
+        
+    
+    
+            var circle_marker_8880511468b5887b7d99aa034c7ccf17 = L.circleMarker(
+                [3.9366, 41.867],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_d7fa42ae8b272a637f11f7629e5a2de1 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_073ce7a6254b0ba664aed6ada40a086c = $(`<div id="html_073ce7a6254b0ba664aed6ada40a086c" style="width: 100.0%; height: 100.0%;">             <b>MANDERA</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: nan years             </div>`)[0];
+                popup_d7fa42ae8b272a637f11f7629e5a2de1.setContent(html_073ce7a6254b0ba664aed6ada40a086c);
+            
+        
+
+        circle_marker_8880511468b5887b7d99aa034c7ccf17.bindPopup(popup_d7fa42ae8b272a637f11f7629e5a2de1)
+        ;
+
+        
+    
+    
+            var circle_marker_7118e266dc827cc7adef72d088acf9f4 = L.circleMarker(
+                [0.9167, 35.5167],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_13b279629e72b7fe153d895bb28ab24a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a46382eb01f25e4057cbaa3e312a3fa3 = $(`<div id="html_a46382eb01f25e4057cbaa3e312a3fa3" style="width: 100.0%; height: 100.0%;">             <b>MARAKWET</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 12.0 years             </div>`)[0];
+                popup_13b279629e72b7fe153d895bb28ab24a.setContent(html_a46382eb01f25e4057cbaa3e312a3fa3);
+            
+        
+
+        circle_marker_7118e266dc827cc7adef72d088acf9f4.bindPopup(popup_13b279629e72b7fe153d895bb28ab24a)
+        ;
+
+        
+    
+    
+            var circle_marker_2eaba30417c6f2e1f5fa93a434e6521e = L.circleMarker(
+                [2.3284, 37.9899],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_38069458b78c20189fcab18e5a51367e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_587ee0499a5450c59cf53c88e31850a7 = $(`<div id="html_587ee0499a5450c59cf53c88e31850a7" style="width: 100.0%; height: 100.0%;">             <b>MARSABIT</b><br>             Accidents: 6<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 32.7 years             </div>`)[0];
+                popup_38069458b78c20189fcab18e5a51367e.setContent(html_587ee0499a5450c59cf53c88e31850a7);
+            
+        
+
+        circle_marker_2eaba30417c6f2e1f5fa93a434e6521e.bindPopup(popup_38069458b78c20189fcab18e5a51367e)
+        ;
+
+        
+    
+    
+            var circle_marker_50be2982962eb5a74c40702562e011dd = L.circleMarker(
+                [0.0467, 37.649],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_cfe5627eaf7a8621c5e0ab7aa6d885f1 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d22212a1a99e6492e54940749eea9290 = $(`<div id="html_d22212a1a99e6492e54940749eea9290" style="width: 100.0%; height: 100.0%;">             <b>MERU</b><br>             Accidents: 25<br>             Risk Level: Medium<br>             Night Accidents: 32.0%<br>             Avg Victim Age: 39.9 years             </div>`)[0];
+                popup_cfe5627eaf7a8621c5e0ab7aa6d885f1.setContent(html_d22212a1a99e6492e54940749eea9290);
+            
+        
+
+        circle_marker_50be2982962eb5a74c40702562e011dd.bindPopup(popup_cfe5627eaf7a8621c5e0ab7aa6d885f1)
+        ;
+
+        
+    
+    
+            var circle_marker_b604155007612b41ea59cc684035b8fa = L.circleMarker(
+                [-1.0634, 34.4731],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_ae9d32a019682203633840186e3fce84 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a786289c57b2f7113e296f2790034a27 = $(`<div id="html_a786289c57b2f7113e296f2790034a27" style="width: 100.0%; height: 100.0%;">             <b>MIGORI</b><br>             Accidents: 13<br>             Risk Level: Medium<br>             Night Accidents: 15.4%<br>             Avg Victim Age: 16.2 years             </div>`)[0];
+                popup_ae9d32a019682203633840186e3fce84.setContent(html_a786289c57b2f7113e296f2790034a27);
+            
+        
+
+        circle_marker_b604155007612b41ea59cc684035b8fa.bindPopup(popup_ae9d32a019682203633840186e3fce84)
+        ;
+
+        
+    
+    
+            var circle_marker_ec8a655e0573defe7f4a587a52414db7 = L.circleMarker(
+                [-4.0435, 39.6682],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5.4, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_8f096f4e7a40b4012cd5e034fd2adaae = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d72f94804a4deb0e52a702f5b9e51eca = $(`<div id="html_d72f94804a4deb0e52a702f5b9e51eca" style="width: 100.0%; height: 100.0%;">             <b>MOMBASA</b><br>             Accidents: 27<br>             Risk Level: Medium<br>             Night Accidents: 22.2%<br>             Avg Victim Age: 36.1 years             </div>`)[0];
+                popup_8f096f4e7a40b4012cd5e034fd2adaae.setContent(html_d72f94804a4deb0e52a702f5b9e51eca);
+            
+        
+
+        circle_marker_ec8a655e0573defe7f4a587a52414db7.bindPopup(popup_8f096f4e7a40b4012cd5e034fd2adaae)
+        ;
+
+        
+    
+    
+            var circle_marker_f3b31c448d52d892b0cf11de22d62aeb = L.circleMarker(
+                [3.521, 39.056],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_ef96df9d7f175d326a7780e647444d55 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d333a917479b672c1a413bc0b5155437 = $(`<div id="html_d333a917479b672c1a413bc0b5155437" style="width: 100.0%; height: 100.0%;">             <b>MOYALE</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 100.0%<br>             Avg Victim Age: 59.0 years             </div>`)[0];
+                popup_ef96df9d7f175d326a7780e647444d55.setContent(html_d333a917479b672c1a413bc0b5155437);
+            
+        
+
+        circle_marker_f3b31c448d52d892b0cf11de22d62aeb.bindPopup(popup_ef96df9d7f175d326a7780e647444d55)
+        ;
+
+        
+    
+    
+            var circle_marker_b6ab5bd71825ccbdf40a54508e16930f = L.circleMarker(
+                [-0.7167, 37.15],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_8ac243b5621e9f67d8d42e66f92ad34b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_fc0d1fae388c4b3f34a773cec8002520 = $(`<div id="html_fc0d1fae388c4b3f34a773cec8002520" style="width: 100.0%; height: 100.0%;">             <b>MURANGA</b><br>             Accidents: 19<br>             Risk Level: Medium<br>             Night Accidents: 36.8%<br>             Avg Victim Age: 38.2 years             </div>`)[0];
+                popup_8ac243b5621e9f67d8d42e66f92ad34b.setContent(html_fc0d1fae388c4b3f34a773cec8002520);
+            
+        
+
+        circle_marker_b6ab5bd71825ccbdf40a54508e16930f.bindPopup(popup_8ac243b5621e9f67d8d42e66f92ad34b)
+        ;
+
+        
+    
+    
+            var circle_marker_c53df4d3dd25fcf6e23a6e1d6794848e = L.circleMarker(
+                [-0.9333, 38.0667],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_3407f55cfbc0cdc797c29d710ef68d9f = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_ecbaf5258ff5766adfa7971c8854fc3b = $(`<div id="html_ecbaf5258ff5766adfa7971c8854fc3b" style="width: 100.0%; height: 100.0%;">             <b>MWINGI</b><br>             Accidents: 3<br>             Risk Level: Low<br>             Night Accidents: 100.0%<br>             Avg Victim Age: 26.0 years             </div>`)[0];
+                popup_3407f55cfbc0cdc797c29d710ef68d9f.setContent(html_ecbaf5258ff5766adfa7971c8854fc3b);
+            
+        
+
+        circle_marker_c53df4d3dd25fcf6e23a6e1d6794848e.bindPopup(popup_3407f55cfbc0cdc797c29d710ef68d9f)
+        ;
+
+        
+    
+    
+            var circle_marker_053f0b5496f8be75e54e055a6e74a2bd = L.circleMarker(
+                [-1.2921, 36.8219],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 36.6, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_0bbfd88b046e80bf3b56b351a31bd02d = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2ccba30a9013cf8f960abf18a3d6fe21 = $(`<div id="html_2ccba30a9013cf8f960abf18a3d6fe21" style="width: 100.0%; height: 100.0%;">             <b>NAIROBI</b><br>             Accidents: 183<br>             Risk Level: High<br>             Night Accidents: 44.3%<br>             Avg Victim Age: 34.6 years             </div>`)[0];
+                popup_0bbfd88b046e80bf3b56b351a31bd02d.setContent(html_2ccba30a9013cf8f960abf18a3d6fe21);
+            
+        
+
+        circle_marker_053f0b5496f8be75e54e055a6e74a2bd.bindPopup(popup_0bbfd88b046e80bf3b56b351a31bd02d)
+        ;
+
+        
+    
+    
+            var circle_marker_eb9136028d231c82c8e43d552520ef3d = L.circleMarker(
+                [-0.3031, 36.08],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.2, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_99965dd1c02d29d5ff9815c2a662604e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f54b770b646b0590fa8357e91fc7a488 = $(`<div id="html_f54b770b646b0590fa8357e91fc7a488" style="width: 100.0%; height: 100.0%;">             <b>NAKURU</b><br>             Accidents: 76<br>             Risk Level: High<br>             Night Accidents: 47.4%<br>             Avg Victim Age: 35.7 years             </div>`)[0];
+                popup_99965dd1c02d29d5ff9815c2a662604e.setContent(html_f54b770b646b0590fa8357e91fc7a488);
+            
+        
+
+        circle_marker_eb9136028d231c82c8e43d552520ef3d.bindPopup(popup_99965dd1c02d29d5ff9815c2a662604e)
+        ;
+
+        
+    
+    
+            var circle_marker_5edddc4f461b26d38d0d758bc0eeddd1 = L.circleMarker(
+                [0.1833, 35.1167],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_5bb58e97b98033647eb1b591614b4f22 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_ebd8282b364cc1bb62e074a8baf28109 = $(`<div id="html_ebd8282b364cc1bb62e074a8baf28109" style="width: 100.0%; height: 100.0%;">             <b>NANDI</b><br>             Accidents: 8<br>             Risk Level: Low<br>             Night Accidents: 37.5%<br>             Avg Victim Age: 32.6 years             </div>`)[0];
+                popup_5bb58e97b98033647eb1b591614b4f22.setContent(html_ebd8282b364cc1bb62e074a8baf28109);
+            
+        
+
+        circle_marker_5edddc4f461b26d38d0d758bc0eeddd1.bindPopup(popup_5bb58e97b98033647eb1b591614b4f22)
+        ;
+
+        
+    
+    
+            var circle_marker_cf49ceb26d29a3e272bd1dc1b166f7ee = L.circleMarker(
+                [-1.0833, 35.8667],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_0ccfc589c0877df2e0c6a04a065421e1 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a1cce1f1b177b2634af9686517d03dda = $(`<div id="html_a1cce1f1b177b2634af9686517d03dda" style="width: 100.0%; height: 100.0%;">             <b>NAROK</b><br>             Accidents: 21<br>             Risk Level: Medium<br>             Night Accidents: 52.4%<br>             Avg Victim Age: 30.9 years             </div>`)[0];
+                popup_0ccfc589c0877df2e0c6a04a065421e1.setContent(html_a1cce1f1b177b2634af9686517d03dda);
+            
+        
+
+        circle_marker_cf49ceb26d29a3e272bd1dc1b166f7ee.bindPopup(popup_0ccfc589c0877df2e0c6a04a065421e1)
+        ;
+
+        
+    
+    
+            var circle_marker_2ea90e42713de7d2609b4ee3ea202450 = L.circleMarker(
+                [0.0333, 36.3667],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_9cca110145d6207d41bd010f17ce86be = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_6a62403fe29305f69428975e0e75d442 = $(`<div id="html_6a62403fe29305f69428975e0e75d442" style="width: 100.0%; height: 100.0%;">             <b>NYAHURURU</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 23.0 years             </div>`)[0];
+                popup_9cca110145d6207d41bd010f17ce86be.setContent(html_6a62403fe29305f69428975e0e75d442);
+            
+        
+
+        circle_marker_2ea90e42713de7d2609b4ee3ea202450.bindPopup(popup_9cca110145d6207d41bd010f17ce86be)
+        ;
+
+        
+    
+    
+            var circle_marker_fefbb30d6ce922bc569e1f038513414b = L.circleMarker(
+                [-0.5667, 34.9333],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_9da951dc2e1e6143d251c8b1fc8e7727 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_446a0cc12f219cf7a24d8d213c022c8c = $(`<div id="html_446a0cc12f219cf7a24d8d213c022c8c" style="width: 100.0%; height: 100.0%;">             <b>NYAMIRA</b><br>             Accidents: 15<br>             Risk Level: Medium<br>             Night Accidents: 13.3%<br>             Avg Victim Age: 24.3 years             </div>`)[0];
+                popup_9da951dc2e1e6143d251c8b1fc8e7727.setContent(html_446a0cc12f219cf7a24d8d213c022c8c);
+            
+        
+
+        circle_marker_fefbb30d6ce922bc569e1f038513414b.bindPopup(popup_9da951dc2e1e6143d251c8b1fc8e7727)
+        ;
+
+        
+    
+    
+            var circle_marker_cc7a4377afd1eb5f91bb2602a697c6f4 = L.circleMarker(
+                [-0.1833, 36.3333],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_45a4a2e27ad6f6f0732983b791aabcd0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_40d1354f5d919f9943dcbd91070cad1f = $(`<div id="html_40d1354f5d919f9943dcbd91070cad1f" style="width: 100.0%; height: 100.0%;">             <b>NYANDARUA</b><br>             Accidents: 16<br>             Risk Level: Medium<br>             Night Accidents: 31.2%<br>             Avg Victim Age: 41.6 years             </div>`)[0];
+                popup_45a4a2e27ad6f6f0732983b791aabcd0.setContent(html_40d1354f5d919f9943dcbd91070cad1f);
+            
+        
+
+        circle_marker_cc7a4377afd1eb5f91bb2602a697c6f4.bindPopup(popup_45a4a2e27ad6f6f0732983b791aabcd0)
+        ;
+
+        
+    
+    
+            var circle_marker_6a9c8111ee7b0af9bd4812d013a74a71 = L.circleMarker(
+                [-0.4167, 36.95],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.6, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_96be727bcf4b4bc9c57d34f58957c1d5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_8eab71db8b806ddc50dca40c287c6b9a = $(`<div id="html_8eab71db8b806ddc50dca40c287c6b9a" style="width: 100.0%; height: 100.0%;">             <b>NYERI</b><br>             Accidents: 38<br>             Risk Level: Medium<br>             Night Accidents: 47.4%<br>             Avg Victim Age: 36.5 years             </div>`)[0];
+                popup_96be727bcf4b4bc9c57d34f58957c1d5.setContent(html_8eab71db8b806ddc50dca40c287c6b9a);
+            
+        
+
+        circle_marker_6a9c8111ee7b0af9bd4812d013a74a71.bindPopup(popup_96be727bcf4b4bc9c57d34f58957c1d5)
+        ;
+
+        
+    
+    
+            var circle_marker_827cf301245ac61005f024bc174a2b01 = L.circleMarker(
+                [0.0617, 34.2883],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_3d143208c6a0a8d9c9ccc9e6993386ff = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c26b374ba8bc330cdd3873195b645c8f = $(`<div id="html_c26b374ba8bc330cdd3873195b645c8f" style="width: 100.0%; height: 100.0%;">             <b>SIAYA</b><br>             Accidents: 14<br>             Risk Level: Medium<br>             Night Accidents: 21.4%<br>             Avg Victim Age: 38.2 years             </div>`)[0];
+                popup_3d143208c6a0a8d9c9ccc9e6993386ff.setContent(html_c26b374ba8bc330cdd3873195b645c8f);
+            
+        
+
+        circle_marker_827cf301245ac61005f024bc174a2b01.bindPopup(popup_3d143208c6a0a8d9c9ccc9e6993386ff)
+        ;
+
+        
+    
+    
+            var circle_marker_bd1efc6e21d799d78d00a2cb331fa1f8 = L.circleMarker(
+                [-3.3167, 38.4833],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_895ffddeeda8ff50ec704c6723c921d2 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_ff989bb548c297b2642878effd54ffa9 = $(`<div id="html_ff989bb548c297b2642878effd54ffa9" style="width: 100.0%; height: 100.0%;">             <b>TAITA TAVETA</b><br>             Accidents: 13<br>             Risk Level: Medium<br>             Night Accidents: 38.5%<br>             Avg Victim Age: 42.8 years             </div>`)[0];
+                popup_895ffddeeda8ff50ec704c6723c921d2.setContent(html_ff989bb548c297b2642878effd54ffa9);
+            
+        
+
+        circle_marker_bd1efc6e21d799d78d00a2cb331fa1f8.bindPopup(popup_895ffddeeda8ff50ec704c6723c921d2)
+        ;
+
+        
+    
+    
+            var circle_marker_d6ec3d6dc576312da7b6778c22c60dfb = L.circleMarker(
+                [-3.3167, 38.4833],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_0b1227d9aa0e2f38c351fb382af56657 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_65299db1d7d69df96a37e0c60136b8c6 = $(`<div id="html_65299db1d7d69df96a37e0c60136b8c6" style="width: 100.0%; height: 100.0%;">             <b>TAITA-TAVETA</b><br>             Accidents: 2<br>             Risk Level: Low<br>             Night Accidents: 100.0%<br>             Avg Victim Age: nan years             </div>`)[0];
+                popup_0b1227d9aa0e2f38c351fb382af56657.setContent(html_65299db1d7d69df96a37e0c60136b8c6);
+            
+        
+
+        circle_marker_d6ec3d6dc576312da7b6778c22c60dfb.bindPopup(popup_0b1227d9aa0e2f38c351fb382af56657)
+        ;
+
+        
+    
+    
+            var circle_marker_18d2b282522ffcdb62f79d78bf44da3c = L.circleMarker(
+                [0.15, 37.85],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_72cb286567cf495674f1a5f162cc9fc5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_82eec112a5a13530a5c21281cb04a23d = $(`<div id="html_82eec112a5a13530a5c21281cb04a23d" style="width: 100.0%; height: 100.0%;">             <b>TIGANIA</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 70.0 years             </div>`)[0];
+                popup_72cb286567cf495674f1a5f162cc9fc5.setContent(html_82eec112a5a13530a5c21281cb04a23d);
+            
+        
+
+        circle_marker_18d2b282522ffcdb62f79d78bf44da3c.bindPopup(popup_72cb286567cf495674f1a5f162cc9fc5)
+        ;
+
+        
+    
+    
+            var circle_marker_75205c6d58aa703891642a0df72f28d2 = L.circleMarker(
+                [1.0167, 35.0],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_49810977a6a4d6163f93d73e0a93f7c7 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a532e6ae0410448f82dd1fea196f23f9 = $(`<div id="html_a532e6ae0410448f82dd1fea196f23f9" style="width: 100.0%; height: 100.0%;">             <b>TRAN NZOIA</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 52.0 years             </div>`)[0];
+                popup_49810977a6a4d6163f93d73e0a93f7c7.setContent(html_a532e6ae0410448f82dd1fea196f23f9);
+            
+        
+
+        circle_marker_75205c6d58aa703891642a0df72f28d2.bindPopup(popup_49810977a6a4d6163f93d73e0a93f7c7)
+        ;
+
+        
+    
+    
+            var circle_marker_a42856ad216a26da7f9ea10e7b9005b1 = L.circleMarker(
+                [1.0167, 35.0],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_a051da4334fc1ea1b23b4d7b2f4209c3 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_9472dec0960718f49ea34dcf1cbba755 = $(`<div id="html_9472dec0960718f49ea34dcf1cbba755" style="width: 100.0%; height: 100.0%;">             <b>TRANS NZOIA</b><br>             Accidents: 7<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 32.2 years             </div>`)[0];
+                popup_a051da4334fc1ea1b23b4d7b2f4209c3.setContent(html_9472dec0960718f49ea34dcf1cbba755);
+            
+        
+
+        circle_marker_a42856ad216a26da7f9ea10e7b9005b1.bindPopup(popup_a051da4334fc1ea1b23b4d7b2f4209c3)
+        ;
+
+        
+    
+    
+            var circle_marker_91e11ece3a8fc7990405085c930e8e78 = L.circleMarker(
+                [0.55, 35.27],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_a116f44ef881f3d7129f91136d6e930c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d12b462670ff9b906a09677327467c8e = $(`<div id="html_d12b462670ff9b906a09677327467c8e" style="width: 100.0%; height: 100.0%;">             <b>UASIN GISHU</b><br>             Accidents: 17<br>             Risk Level: Medium<br>             Night Accidents: 41.2%<br>             Avg Victim Age: 32.9 years             </div>`)[0];
+                popup_a116f44ef881f3d7129f91136d6e930c.setContent(html_d12b462670ff9b906a09677327467c8e);
+            
+        
+
+        circle_marker_91e11ece3a8fc7990405085c930e8e78.bindPopup(popup_a116f44ef881f3d7129f91136d6e930c)
+        ;
+
+        
+    
+    
+            var circle_marker_91d554ed11aa6c21b6bf0d1a1e51cf4e = L.circleMarker(
+                [0.55, 35.27],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_daacdbe035df7f36aad86fb879a5f7d0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d102d69b0e2f514002202be61303a899 = $(`<div id="html_d102d69b0e2f514002202be61303a899" style="width: 100.0%; height: 100.0%;">             <b>UASIN NGISHU</b><br>             Accidents: 1<br>             Risk Level: Low<br>             Night Accidents: 0.0%<br>             Avg Victim Age: 16.0 years             </div>`)[0];
+                popup_daacdbe035df7f36aad86fb879a5f7d0.setContent(html_d102d69b0e2f514002202be61303a899);
+            
+        
+
+        circle_marker_91d554ed11aa6c21b6bf0d1a1e51cf4e.bindPopup(popup_daacdbe035df7f36aad86fb879a5f7d0)
+        ;
+
+        
+    
+    
+            var circle_marker_2b8e9c0c7e0baaf951e045541b4ee854 = L.circleMarker(
+                [0.0833, 34.7167],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(map_362444164c3bcecb74513f4d94e88175);
+        
+    
+        var popup_c2648159f224801856cdda990fb0f7bd = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_862fe943fcd51640ee61cd567266e496 = $(`<div id="html_862fe943fcd51640ee61cd567266e496" style="width: 100.0%; height: 100.0%;">             <b>VIHIGA</b><br>             Accidents: 10<br>             Risk Level: Low<br>             Night Accidents: 40.0%<br>             Avg Victim Age: 39.2 years             </div>`)[0];
+                popup_c2648159f224801856cdda990fb0f7bd.setContent(html_862fe943fcd51640ee61cd567266e496);
+            
+        
+
+        circle_marker_2b8e9c0c7e0baaf951e045541b4ee854.bindPopup(popup_c2648159f224801856cdda990fb0f7bd)
+        ;
+
+        
+    
+</script>
+</html>
